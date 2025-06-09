@@ -1,0 +1,12 @@
+$adminSiteUrl = "https://pbi365trial-admin.sharepoint.com"
+$title = "House Rules - Communication site"
+$description = "This custom theme will apply the House Rules Board Games corporate branding to your site"
+$siteScriptFile = "C:\SPBranding\HouseRules.json"
+$webTemplate = "68"
+$previewImageUrl = "https://pbi365trial.sharepoint.com/sites/HouseRulesNews/SiteAssets/SiteDesignComms.png"
+
+Connect-SPOService $adminSiteUrl
+
+$jsonFileContent = Get-Content $siteScriptFile -Raw
+$siteScript = Add-SPOSiteScript -Title $title -Content $jsonFileContent | Select -First 1 Id
+Add-SPOSiteDesign -SiteScripts $siteScript.Id -Title $title -webTemplate $webTemplate -Description $description -PreviewImageUrl $previewImageUrl
